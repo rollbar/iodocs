@@ -1,11 +1,11 @@
 {
   "endpoints": [
     {
-      "name": "Read methods",
+      "name": "Items",
       "methods": [
         {
           "MethodName": "item",
-          "Synopsis": "Returns data for the specified item id",
+          "Synopsis": "Returns data for the specified item ID.",
           "HTTPMethod": "GET",
           "URI": "/item/:item_id",
           "RequiresOAuth": "N",
@@ -18,6 +18,222 @@
               "Description": "The ID of the item. Same as the ID found in the URL, e.g. http://ratchet.io/item/:item_id"
             }
           ]
+        },
+        {
+          "MethodName": "items",
+          "Synopsis": "Returns a page of all items for the project.",
+          "HTTPMethod": "GET",
+          "URI": "/items/",
+          "RequiresOAuth": "N",
+          "parameters": [
+            { 
+              "Name": "status",
+              "Required": "N",
+              "Default": "",
+              "Type": "enumerated",
+              "EnumeratedList": [
+                "active",
+                "resolved"
+              ],
+              "Description": "If not empty, only return items with the specified status. Note: does not affect the result when 'ids' is used."
+            },
+            {
+              "Name": "ids",
+              "Required": "N",
+              "Default": "",
+              "Type": "comma-separated list of integers",
+              "Description": "If not empty, list of item IDs to return instead of using all items from the project."
+            },
+            {
+              "Name": "page",
+              "Required": "N",
+              "Default": "",
+              "Type": "integer",
+              "Description": "Page number, optional, starting from 1. 20 items are returned per page."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Instances",
+      "methods": [
+        {
+          "MethodName": "instance",
+          "Synopsis": "Returns data for the specified instance ID.",
+          "HTTPMethod": "GET",
+          "URI": "/instance/:instance_id",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "instance_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "ID of the instance to retrieve. Same as found in URLS like ratchet.io/item/:item_id/instance/:instance_id"
+            }
+          ]
+        },
+        {
+          "MethodName": "instances",
+          "Synopsis": "Returns a page of all the instances for the project.",
+          "HTTPMethod": "GET",
+          "URI": "/instances/",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "ids",
+              "Required": "N",
+              "Default": "",
+              "Type": "comma-separated list of integers",
+              "Description": "If not empty, list of item IDs to return instead of using all items from the project."
+            },
+            {
+              "Name": "page",
+              "Required": "N",
+              "Default": "",
+              "Type": "integer",
+              "Description": "Page number, optional, starting from 1. 20 instances are returned per page."
+            }
+          ]
+        },
+        {
+          "MethodName": "item/instances",
+          "Synopsis": "Returns a page of all instances for a particular item.",
+          "HTTPMethod": "GET",
+          "URI": "/item/:item_id/instances/",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "item_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "string",
+              "Description": "The ID of the item. Same as the ID found in the URL, e.g. http://ratchet.io/item/:item_id"
+            },
+            {
+              "Name": "page",
+              "Required": "N",
+              "Default": "",
+              "Type": "integer",
+              "Description": "Page number, optional, starting from 1. 20 items are returned per page."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Deploys",
+      "methods": [
+        {
+          "MethodName": "deploy",
+          "Synopsis": "Returns data for the specified deploy ID.",
+          "HTTPMethod": "GET",
+          "URI": "/deploy/:deploy_id",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "deploy_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The ID of the deploy. Same as the ID found in URLs like ratchet.io/deploy/:deploy_id"
+            }
+          ]
+        },
+        {
+          "MethodName": "deploys",
+          "Synopsis": "Returns a page of all deploys for the project.",
+          "HTTPMethod": "GET",
+          "URI": "/deploys/",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "ids",
+              "Required": "N",
+              "Default": "",
+              "Type": "comma-separated list of integers",
+              "Description": "If not empty, list of deploy IDs to return instead of using all deploys from the project."
+            },
+            {
+              "Name": "page",
+              "Required": "N",
+              "Default": "",
+              "Type": "integer",
+              "Description": "Page number, optional, starting from 1. 20 deploys are returned per page."
+            }
+          ]
+        },
+        {
+          "MethodName": "deploy",
+          "Synopsis": "Notify Ratchet of a deploy",
+          "HTTPMethod": "POST",
+          "URI": "/deploy/",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "environment",
+              "Required": "Y",
+              "Default": "",
+              "Type": "string",
+              "Description": "Environment name. Any string up to 255 characters is OK. For best results, use conventional names like 'production', 'staging', 'development' when applicable."
+            },
+            {
+              "Name": "revision",
+              "Required": "N",
+              "Default": "",
+              "Type": "string",
+              "Description": "Revision identifier. For git, use the full sha."
+            },
+            {
+              "Name": "timestamp",
+              "Required": "N",
+              "Default": "",
+              "Type": "integer",
+              "Description": "Unix timestamp when the deploy completed. Defaults to the current timestamp."
+            },
+            {
+              "Name": "duration",
+              "Required": "N",
+              "Default": "",
+              "Type": "integer",
+              "Description": "Deploy duration, in seconds. Defaults to 1. If you don't measure this, just omit it."
+            },
+            {
+              "Name": "comment",
+              "Required": "N",
+              "Default": "",
+              "Type": "string",
+              "Description": "Free-form text describing the deploy"
+            },
+            {
+              "Name": "local_username",
+              "Required": "N",
+              "Default": "",
+              "Type": "string",
+              "Description": "Username or other identifier of the user who deployed. For example, the output of `whoami`"
+            },
+            {
+              "Name": "ratchet_username",
+              "Required": "N",
+              "Default": "",
+              "Type": "string",
+              "Description": "Ratchet username of the user who deployed."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Project",
+      "methods": [
+        {
+          "MethodName": "project",
+          "Synopsis": "Returns information about the project that the used access_token belongs to.",
+          "HTTPMethod": "GET",
+          "URI": "/project",
+          "RequiresOAuth": "N",
+          "parameters": []
         }
       ]
     }
