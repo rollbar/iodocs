@@ -1,0 +1,25 @@
+{
+  "endpoints": [
+    {
+      "name": "Read methods",
+      "methods": [
+        {
+          "MethodName": "item",
+          "Synopsis": "Returns data for the specified item id",
+          "HTTPMethod": "GET",
+          "URI": "/item/:item_id",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "item_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "string",
+              "Description": "The ID of the item. Same as the ID found in the URL, e.g. http://ratchet.io/item/:item_id"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
