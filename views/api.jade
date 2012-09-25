@@ -1,4 +1,3 @@
-h1=apiInfo.name 
 - if (session.authed && apiInfo.oauth && apiInfo.oauth.type =='three-legged')
     - var authed ='authed'
 - else
@@ -13,7 +12,7 @@ form#credentials
              span Authenticated with OAuth
              img(src='/images/accept.png')
          - else
-             h2 API Credentials
+             h2 Access Token
                img(src='/images/key.png')
 
              - if (apiInfo.oauth)
@@ -21,6 +20,8 @@ form#credentials
 
              - if (apiInfo.auth.defaultKey)
                  - var defaultKey =apiInfo.auth.defaultKey
+             - else if (apiInfo.defaultKey)
+                 - var defaultKey =apiInfo.defaultKey
              - else
                  - var defaultKey =''
 
@@ -29,7 +30,6 @@ form#credentials
              - else
                  - var defaultSecret =''
              div
-                 label(for='key') API Key
                  input(id='key', name='key', value=defaultKey, style='color=#EEEEEE')
              div
                  - if (apiInfo.oauth || apiInfo.signature)

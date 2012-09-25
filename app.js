@@ -634,11 +634,18 @@ app.dynamicHelpers({
         return req.session;
     },
     apiInfo: function(req, res) {
+        var info;
         if (req.params.api) {
-            return apisConfig[req.params.api];
+            info = apisConfig[req.params.api];
         } else {
-            return apisConfig;
+            info = apisConfig;
         }
+        console.log("in apiInfo");
+        if (req.query.access_token) {
+            console.log("got an access token");
+            info.defaultKey = req.query.access_token;
+        }
+        return info;
     },
     apiName: function(req, res) {
         if (req.params.api) {
@@ -658,7 +665,12 @@ app.dynamicHelpers({
 // Routes
 //
 app.get('/', function(req, res) {
-    res.redirect('/ratchet');
+    // hack to make this always show the ratchet api
+    req.params.api = 'ratchet';
+    res.render('api', {
+        access_token: req.query.access_token
+    });
+    
     /*res.render('listAPIs', {
         title: config.title
     });*/
