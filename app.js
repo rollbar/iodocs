@@ -677,7 +677,7 @@ app.get('/iodocs/', function(req, res) {
 });
 
 // Process the API request
-app.post('/processReq', oauth, processRequest, function(req, res) {
+app.post('/iodocs/processReq', oauth, processRequest, function(req, res) {
     var result = {
         headers: req.resultHeaders,
         response: req.result,
@@ -689,16 +689,16 @@ app.post('/processReq', oauth, processRequest, function(req, res) {
 });
 
 // Just auth
-app.all('/auth', oauth);
+app.all('/iodocs/auth', oauth);
 
 // OAuth callback page, closes the window immediately after storing access token/secret
-app.get('/authSuccess/:api', oauthSuccess, function(req, res) {
+app.get('/iodocs/authSuccess/:api', oauthSuccess, function(req, res) {
     res.render('authSuccess', {
         title: 'OAuth Successful'
     });
 });
 
-app.post('/upload', function(req, res) {
+app.post('/iodocs/upload', function(req, res) {
   console.log(req.body.user);
   res.redirect('back');
 });
