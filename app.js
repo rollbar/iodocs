@@ -106,7 +106,7 @@ app.configure(function() {
 
     app.use(app.router);
 
-    app.use(express.static(__dirname + '/public'));
+    app.use("/iodocs", express.static(__dirname + '/public'));
 });
 
 app.configure('development', function() {
@@ -664,7 +664,7 @@ app.dynamicHelpers({
 //
 // Routes
 //
-app.get('/', function(req, res) {
+app.get('/iodocs/', function(req, res) {
     // hack to make this always show the ratchet api
     req.params.api = 'ratchet';
     res.render('api', {
