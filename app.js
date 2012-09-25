@@ -658,9 +658,10 @@ app.dynamicHelpers({
 // Routes
 //
 app.get('/', function(req, res) {
-    res.render('listAPIs', {
+    res.redirect('/ratchet');
+    /*res.render('listAPIs', {
         title: config.title
-    });
+    });*/
 });
 
 // Process the API request
