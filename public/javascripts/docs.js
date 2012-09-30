@@ -295,6 +295,47 @@
                 .toggleClass('error', true)
                 .text(response);
         })
-    })
+    });
+
+    // Toggle example section
+    $('a.example').click(function(event) {
+      var $target = $(event.target);
+      var exampleId = $target.attr('exampleId');
+      var href = $target.attr('href');
+      var $dest = $('#' + exampleId.replace(/\./g, '-'));
+      var $methodParent = $target.closest('ul.methods');
+      var $methodLi = $target.closest('li.method');
+
+      if ($target.attr('current') != 'true') {
+        var $form = $('form', $methodLi);
+        var $tmpInput = $('<input type="hidden" name="access_token" value="' + $('#key').val() + '"></input>');
+        $form.append($tmpInput);
+
+        var params = $form.serialize();
+        $tmpInput.remove();
+
+        $.get(href, params, function(data, status, xhr) {
+          $dest.html(data);
+          if ($dest.is(':hidden')) {
+            $dest.show();
+          }
+          $('a.example', $methodParent).attr('current', false);
+          $target.attr('current', true);
+        });
+      } else {
+        $dest.hide();
+        $('a.example', $methodParent).attr('current', false);
+      }
+      event.preventDefault();
+      return false;
+    });
+    $('div.headers h4').click(function(event) {
+        event.preventDefault();
+
+        $(this.parentNode).toggleClass('expanded');
+
+        $('div.fields', this.parentNode).slideToggle();
+    });
+
 
 })();

@@ -42,6 +42,10 @@ blockquote:before, blockquote:after, q:before, q:after {
   float: left;
 }
 
+div.title span.example-link {
+  float: right;
+}
+
 .f-right {
   font-size: 8pt;
   text-align: right;
@@ -107,6 +111,11 @@ code,
 kbd,
 samp {
   font-family: monospace, sans-serif;
+}
+
+code {
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+  font-size: 15px;
 }
 
 html {

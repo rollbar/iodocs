@@ -17,7 +17,11 @@
               "Type": "string",
               "Description": "The ID of the item. Same as the ID found in the URL, e.g. http://ratchet.io/item/:item_id"
             }
-          ]
+          ],
+          "examples": {
+              "curl": "item.get.curl",
+              "python": "item.get.python"
+          }
         },
         {
           "MethodName": "items",

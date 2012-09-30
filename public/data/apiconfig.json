@@ -2,7 +2,7 @@
     "ratchet": {
         "name": "Ratchet.io API",
         "protocol": "http",
-        "baseURL": "brianapi.ratchetdev.com",
+        "baseURL": "localhost:8000",
         "publicPath": "/api/1",
         "auth": "key",
         "keyParam": "access_token"

@@ -106,6 +106,7 @@ app.configure(function() {
 
     app.use(app.router);
 
+    //app.use("/", express.static(__dirname + '/public'));
     app.use("/iodocs", express.static(__dirname + '/public'));
 });
 
@@ -674,6 +675,19 @@ app.get('/iodocs/', function(req, res) {
     /*res.render('listAPIs', {
         title: config.title
     });*/
+});
+
+app.get('/examples/:exampleId', function(req, res) {
+    var exampleTemplate = 'examples/' + req.params.exampleId + '.jade'; 
+    var apiName = 'ratchet';
+    var apiConfig = apisConfig[apiName];
+    var baseUrl = apiConfig.protocol + '://' + apiConfig.baseURL + apiConfig.publicPath;
+
+    res.partial(exampleTemplate, {
+        baseUrl: baseUrl,
+        accessToken: req.query.access_token || 'ACCESS_TOKEN',
+        query: req.query
+    });
 });
 
 // Process the API request

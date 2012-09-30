@@ -69,6 +69,13 @@ ul
                             span.http-method #{method.HTTPMethod}
                             span.name #{method.MethodName}
                             span.uri #{method.URI}
+                            - if (method.examples)
+                                - each example, lang in method.examples
+                                    span.example-link
+                                        a(class='example ' + lang, href='/examples/' + example, exampleId=endpoint.name + '-' + method.MethodName) #{lang}
+                        - if (method.examples)
+                            - each example, lang in method.examples
+                                div(id=endpoint.name + '-' + method.MethodName, style="margin:10px;display:none")
                         form.hidden
                             input(type='hidden', name='httpMethod', value=method.HTTPMethod)
                             input(type='hidden', name='oauth', value=secure)
