@@ -1,3 +1,4 @@
+link(rel='stylesheet', href='stylesheets/tabs.css')
 - if (session.authed && apiInfo.oauth && apiInfo.oauth.type =='three-legged')
     - var authed ='authed'
 - else
@@ -69,13 +70,6 @@ ul
                             span.http-method #{method.HTTPMethod}
                             span.name #{method.MethodName}
                             span.uri #{method.URI}
-                            - if (method.examples)
-                                - each example, lang in method.examples
-                                    span.example-link
-                                        a(class='example ' + lang, href='/examples/' + example, exampleId=endpoint.name + '-' + method.MethodName) #{lang}
-                        - if (method.examples)
-                            - each example, lang in method.examples
-                                div(id=endpoint.name + '-' + method.MethodName, style="margin:10px;display:none")
                         form.hidden
                             input(type='hidden', name='httpMethod', value=method.HTTPMethod)
                             input(type='hidden', name='oauth', value=secure)
@@ -161,3 +155,21 @@ ul
                                     // Create header fields and button to add/remove headers.
                             - if (!method['read-only'])
                                 input(type='submit', id=method.MethodName, value='Try it!')
+                            .examples
+                                - if (method.examples)
+                                    div.tabs_container
+                                        ul.example-nav.tabs
+                                            - var counter = 0
+                                            - each example, lang in method.examples
+                                                li(class=(counter == 0 ? ' active' : ''))
+                                                    a(href="/examples/" + example, class="example", exampleId=endpoint.name + '-' + method.MethodName)
+                                                        #{lang}
+                                                - counter++
+                                    div.tab_content_container
+                                        div(id=endpoint.name + '-' + method.MethodName, class="tab_content', style="margin:10px;")
+                                            - var counter =0
+                                            - each example, lang in method.examples
+                                                - if (counter == 0)
+                                                    script
+                                                        $('##{endpoint.name}-#{method.MethodName}').load('/examples/#{example}');
+                                                - counter++

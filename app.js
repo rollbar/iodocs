@@ -683,6 +683,7 @@ app.get('/examples/:exampleId', function(req, res) {
     var apiConfig = apisConfig[apiName];
     var baseUrl = apiConfig.protocol + '://' + apiConfig.baseURL + apiConfig.publicPath;
 
+    req.query.params = req.query.params || {};
     res.partial(exampleTemplate, {
         baseUrl: baseUrl,
         accessToken: req.query.access_token || 'ACCESS_TOKEN',
