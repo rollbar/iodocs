@@ -1,0 +1,15 @@
+include highlight
+
+- var extra = [];
+- if (query.params.ids && query.params.ids.length > 0)
+    - extra.push('ids=' + query.params.ids)
+- if (query.params.page)
+    - extra.push('page=' + query.params.page)
+- if (extra.length > 0)
+    - extra = '&' + extra.join('&')
+
+div
+    h2 Curl Example
+    pre
+        code
+            curl #{baseUrl}/instances/?access_token=#{accessToken}#{extra}

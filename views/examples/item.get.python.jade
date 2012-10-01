@@ -3,6 +3,7 @@ div
     h2 Python Example
     pre
         code.python
+            from datetime import datetime
             import requests
             resp = requests.get("#{baseUrl}/item/#{query.params.item_id || ':item_id'}?access_token=#{accessToken}").json
             if resp['err'] == 0:

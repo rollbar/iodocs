@@ -1,0 +1,6 @@
+include highlight
+div
+    h2 Curl Example
+    pre
+        code
+            curl #{baseUrl}/item/#{query.params.instance_id || ':instance_id'}?access_token=#{accessToken}

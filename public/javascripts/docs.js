@@ -302,7 +302,7 @@
       var $target = $(event.target);
       var exampleId = $target.attr('exampleId');
       var href = $target.attr('href');
-      var $dest = $('#' + exampleId.replace(/\./g, '-'));
+      var $dest = $('#' + exampleId);
       var $methodParent = $target.closest('ul.methods');
       var $methodLi = $target.closest('li.method');
 
@@ -313,10 +313,10 @@
       var params = $form.serialize();
       $tmpInput.remove();
 
-      $.get(href, params, function(data, status, xhr) {
-        $dest.html(data);
+      $dest.load(href, params, function(data, status, xhr) {
         $('li.active', $methodLi).removeClass('active');
         $target.parent().addClass('active', true);
+        $(document).scrollTop($target.closest('li.method').offset().top); 
       });
       event.preventDefault();
       return false;

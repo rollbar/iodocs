@@ -157,19 +157,21 @@ ul
                                 input(type='submit', id=method.MethodName, value='Try it!')
                             .examples
                                 - if (method.examples)
+                                    - var exampleId = endpoint.name + '-' + method.MethodName.replace(/\//g, '-') + '-' + method.HTTPMethod
                                     div.tabs_container
                                         ul.example-nav.tabs
                                             - var counter = 0
                                             - each example, lang in method.examples
                                                 li(class=(counter == 0 ? ' active' : ''))
-                                                    a(href="/examples/" + example, class="example", exampleId=endpoint.name + '-' + method.MethodName)
+                                                    a(href="/examples/" + example + '#' + exampleId, class="example", exampleId=exampleId)
                                                         #{lang}
                                                 - counter++
                                     div.tab_content_container
-                                        div(id=endpoint.name + '-' + method.MethodName, class="tab_content', style="margin:10px;")
+                                        a(name=exampleId)
+                                        div(id=exampleId, class="tab_content', style="margin:10px;")
                                             - var counter =0
                                             - each example, lang in method.examples
                                                 - if (counter == 0)
                                                     script
-                                                        $('##{endpoint.name}-#{method.MethodName}').load('/examples/#{example}');
+                                                        $('##{exampleId}').load('/examples/#{example}');
                                                 - counter++

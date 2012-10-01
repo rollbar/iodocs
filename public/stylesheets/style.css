@@ -517,11 +517,11 @@ li {
   cursor: pointer;
 }
 
-.method .title:hover span {
+.method div.title:hover span {
   text-decoration: underline;
 }
 
-.method .title:hover span.http-method {
+.method div.title:hover span.http-method {
   text-decoration: none;
 }
 
