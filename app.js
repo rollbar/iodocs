@@ -106,7 +106,7 @@ app.configure(function() {
 
     app.use(app.router);
 
-    //app.use("/", express.static(__dirname + '/public'));
+    app.use("/", express.static(__dirname + '/public'));
     app.use("/iodocs", express.static(__dirname + '/public'));
 });
 
@@ -684,6 +684,7 @@ app.get('/examples/:exampleId', function(req, res) {
     var baseUrl = apiConfig.protocol + '://' + apiConfig.baseURL + apiConfig.publicPath;
 
     req.query.params = req.query.params || {};
+    console.log(req.query);
     res.partial(exampleTemplate, {
         baseUrl: baseUrl,
         accessToken: req.query.access_token || 'ACCESS_TOKEN',

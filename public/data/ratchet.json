@@ -55,7 +55,11 @@
               "Type": "integer",
               "Description": "Page number, optional, starting from 1. 20 items are returned per page."
             }
-          ]
+          ],
+          "examples": {
+            "curl": "items.get.curl",
+            "python": "items.get.python"
+          }
         }
       ]
     },

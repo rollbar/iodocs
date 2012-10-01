@@ -315,12 +315,21 @@
 
       $.get(href, params, function(data, status, xhr) {
         $dest.html(data);
-        $('li.active', $methodParent).removeClass('active');
+        $('li.active', $methodLi).removeClass('active');
         $target.parent().addClass('active', true);
       });
       event.preventDefault();
       return false;
     });
+    $('li.method form input,select,textarea').change(function(event) {
+      var $targetForm = $(event.target).closest('form');
+      var $activeExampleLink = $('li.active a', $targetForm);
+      $activeExampleLink.trigger('click');
+    });
+    $('#key').change(function(event) {
+      $('li.method form li.active a').trigger('click');
+    });
+
     $('div.headers h4').click(function(event) {
         event.preventDefault();
 

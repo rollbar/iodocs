@@ -1,0 +1,25 @@
+include highlight
+- var extra = [];
+- if (query.params.ids && query.params.ids.length > 0)
+    - extra.push('ids=' + query.params.ids)
+- if (query.params.page)
+    - extra.push('page=' + query.params.page)
+- if (query.params.status)
+    - extra.push('status=' + query.params.status)
+- if (extra.length > 0)
+    - extra = '&' + extra.join('&')
+
+div
+    h2 Python Example
+    pre
+        code.python
+            import requests
+            resp = requests.get("#{baseUrl}/items/?access_token=#{accessToken}#{extra}").json
+            if resp['err'] == 0:
+                page = resp['result']['page']
+                items = resp['result']['items']
+                ids = map(lambda item: item.id, items).join(', ')
+                print 'page:', page, ' num items:', len(items), ' ids:', ids
+            else:
+                print 'error:', resp['message']
+
