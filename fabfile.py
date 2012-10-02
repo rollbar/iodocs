@@ -15,7 +15,6 @@ env.roledefs = {
 def deploy():
     # pre-roll checks
     check_user()
-    check_current_directory()
 
     # do a local git pull, so the revision # when we record the deploy is correct
     local("git pull")
@@ -39,13 +38,6 @@ def update_and_restart():
 def check_user():
     if getpass.getuser() != 'deploy':
         print "This command should be run as deploy. Run like: sudo -u deploy fab deploy"
-        sys.exit(1)
-
-
-def check_current_directory():
-    # check if we have production.ini. if not, we're in the wrong place.
-    if not os.path.isfile('production.ini'):
-        print "This command should be run from the project root."
         sys.exit(1)
 
 
