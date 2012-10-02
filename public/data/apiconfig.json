@@ -1,8 +1,8 @@
 {
     "ratchet": {
-        "name": "Ratchet.io API",
-        "protocol": "http",
-        "baseURL": "brianapi.ratchetdev.com",
+        "name": "Ratchet.io",
+        "protocol": "https",
+        "baseURL": "submit.ratchet.io",
         "publicPath": "/api/1",
         "auth": "key",
         "keyParam": "access_token"
