@@ -1,0 +1,6 @@
+include highlight
+div
+    h2 Curl Example
+    pre
+        code
+            curl #{baseUrl}/deploy/#{query.params.deploy_id || ':deploy_id'}?access_token=#{accessToken}

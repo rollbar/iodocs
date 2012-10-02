@@ -1,0 +1,14 @@
+include highlight
+div
+    h2 Python Example
+    pre
+        code.python
+            from datetime import datetime
+            import requests
+            resp = requests.get("#{baseUrl}/item/#{query.params.item_id || ':item_id'}?access_token=#{accessToken}").json
+            if resp['err'] == 0:
+                item = resp['result']
+                print 'Item id: %d, Project: %d, Title: %s' % (item['id'], item['project_id'], item['title'])
+            else:
+                print 'error:', resp['message']
+

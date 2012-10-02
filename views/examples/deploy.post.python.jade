@@ -1,0 +1,29 @@
+include highlight
+
+- var buffer = []
+- if (query.params.timestamp && parseInt(query.params.timestamp) > 0)
+    - buffer.push("payload['timestamp'] = " + parseInt(query.params.timestamp))
+- if (query.params.duration && parseInt(query.params.duration) > 0)
+    - buffer.push("payload['duration'] = " + parseInt(query.params.duration))
+- if (query.params.comment && query.params.comment.length > 0)
+    - buffer.push("payload['comment'] = '" + query.params.comment + "'")
+- if (query.params.local_username && query.params.local_username.length > 0)
+    - buffer.push("payload['local_username'] = '" + query.params.local_username + "'")
+- if (query.params.ratchet_username && query.params.ratchet_username.length > 0)
+    - buffer.push("payload['ratchet_username'] = '" + query.params.ratchet_username + "'")
+
+div
+    h2 Python Example
+    pre
+        code.python
+            import time
+            import requests
+            payload = {'environment': '#{query.params.environment || ':environment'}',
+                       'revision': '#{query.params.revision || ':revision'}'}
+            #{buffer.join('\n')}
+            resp = requests.post("#{baseUrl}/deploy/?access_token=#{accessToken}", data=payload).json
+            if resp['err'] == 0:
+                print 'Deploy id: %d' % resp['result']['id']
+            else:
+                print 'error:', resp['message']
+

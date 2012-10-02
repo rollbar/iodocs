@@ -1,0 +1,34 @@
+include highlight
+
+- var varBuffer = []
+- var paramBuffer = []
+- if (query.params.timestamp && parseInt(query.params.timestamp) > 0)
+    - varBuffer.push("TIMESTAMP=" + parseInt(query.params.timestamp))
+    - paramBuffer.push("-F timestamp=$TIMESTAMP")
+- if (query.params.duration && parseInt(query.params.duration) > 0)
+    - varBuffer.push("DURATION= " + parseInt(query.params.duration))
+    - paramBuffer.push("-F duration=$DURATION")
+- if (query.params.comment && query.params.comment.length > 0)
+    - varBuffer.push("COMMENT=" + query.params.comment)
+    - paramBuffer.push("-F comment=$COMMENT")
+- if (query.params.local_username && query.params.local_username.length > 0)
+    - varBuffer.push("LOCAL_USERNAME=" + (query.params.local_username || "`whoami`"))
+    - paramBuffer.push("-F local_username=$LOCAL_USERNAME")
+- if (query.params.ratchet_username && query.params.ratchet_username.length > 0)
+    - varBuffer.push("RATCHET_USERNAME=" + query.params.ratchet_username)
+    - paramBuffer.push("-F ratchet_username=$RATCHET_USERNAME")
+
+div
+    h2 Curl Example
+    pre
+        code.bash
+            ACCESS_TOKEN=#{accessToken}
+            ENVIRONMENT=#{query.params.environment || 'ENVIRONMENT'}
+            REVISION=#{query.params.revision || '`git log -n 1 --pretty=format:"%H"`'}
+            #{varBuffer.join('\n')}
+
+            curl #{baseUrl}/deploy/ \\
+                -F access_token=$ACCESS_TOKEN \\
+                -F environment=$ENVIRONMENT \\
+                -F revision=$REVISION \\
+                #{paramBuffer.join(' \\ \n    ')}

@@ -17,7 +17,11 @@
               "Type": "string",
               "Description": "The ID of the item. Same as the ID found in the URL, e.g. http://ratchet.io/item/:item_id"
             }
-          ]
+          ],
+          "examples": {
+              "curl": "item.get.curl",
+              "python": "item.get.python"
+          }
         },
         {
           "MethodName": "items",
@@ -51,7 +55,11 @@
               "Type": "integer",
               "Description": "Page number, optional, starting from 1. 20 items are returned per page."
             }
-          ]
+          ],
+          "examples": {
+            "curl": "items.get.curl",
+            "python": "items.get.python"
+          }
         }
       ]
     },
@@ -72,7 +80,11 @@
               "Type": "integer",
               "Description": "ID of the instance to retrieve. Same as found in URLS like ratchet.io/item/:item_id/instance/:instance_id"
             }
-          ]
+          ],
+          "examples": {
+            "curl": "instance.get.curl",
+            "python": "instance.get.python"
+          }
         },
         {
           "MethodName": "instances",
@@ -95,7 +107,11 @@
               "Type": "integer",
               "Description": "Page number, optional, starting from 1. 20 instances are returned per page."
             }
-          ]
+          ],
+          "examples": {
+            "curl": "instances.get.curl",
+            "python": "instances.get.python"
+          }
         },
         {
           "MethodName": "item/instances",
@@ -118,7 +134,11 @@
               "Type": "integer",
               "Description": "Page number, optional, starting from 1. 20 items are returned per page."
             }
-          ]
+          ],
+          "examples": {
+            "curl": "iteminstances.get.curl",
+            "python": "iteminstances.get.python"
+          }
         }
       ]
     },
@@ -139,7 +159,11 @@
               "Type": "integer",
               "Description": "The ID of the deploy. Same as the ID found in URLs like ratchet.io/deploy/:deploy_id"
             }
-          ]
+          ],
+          "examples": {
+            "curl": "deploy.get.curl",
+            "python": "deploy.get.python"
+          }
         },
         {
           "MethodName": "deploys",
@@ -162,7 +186,11 @@
               "Type": "integer",
               "Description": "Page number, optional, starting from 1. 20 deploys are returned per page."
             }
-          ]
+          ],
+          "examples": {
+            "curl": "deploys.get.curl",
+            "python": "deploys.get.python"
+          }
         },
         {
           "MethodName": "deploy",
@@ -180,7 +208,7 @@
             },
             {
               "Name": "revision",
-              "Required": "N",
+              "Required": "Y",
               "Default": "",
               "Type": "string",
               "Description": "Revision identifier. For git, use the full sha."
@@ -220,7 +248,11 @@
               "Type": "string",
               "Description": "Ratchet username of the user who deployed."
             }
-          ]
+          ],
+          "examples": {
+            "curl": "deploy.post.curl",
+            "python": "deploy.post.python"
+          }
         }
       ]
     },
@@ -233,7 +265,11 @@
           "HTTPMethod": "GET",
           "URI": "/project",
           "RequiresOAuth": "N",
-          "parameters": []
+          "parameters": [],
+          "examples": {
+            "curl": "project.get.curl",
+            "python": "project.get.python"
+          }
         }
       ]
     }

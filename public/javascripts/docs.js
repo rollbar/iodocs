@@ -295,6 +295,48 @@
                 .toggleClass('error', true)
                 .text(response);
         })
-    })
+    });
+
+    // Toggle example section
+    $('a.example').click(function(event) {
+      var $target = $(event.target);
+      var exampleId = $target.attr('exampleId');
+      var href = $target.attr('href');
+      var $dest = $('#' + exampleId);
+      var $methodParent = $target.closest('ul.methods');
+      var $methodLi = $target.closest('li.method');
+
+      var $form = $('form', $methodLi);
+      var $tmpInput = $('<input type="hidden" name="access_token" value="' + $('#key').val() + '"></input>');
+      $form.append($tmpInput);
+
+      var params = $form.serialize();
+      $tmpInput.remove();
+
+      $dest.load(href, params, function(data, status, xhr) {
+        $('li.active', $methodLi).removeClass('active');
+        $target.parent().addClass('active', true);
+        $(document).scrollTop($target.closest('li.method').offset().top); 
+      });
+      event.preventDefault();
+      return false;
+    });
+    $('li.method form input,select,textarea').change(function(event) {
+      var $targetForm = $(event.target).closest('form');
+      var $activeExampleLink = $('li.active a', $targetForm);
+      $activeExampleLink.trigger('click');
+    });
+    $('#key').change(function(event) {
+      $('li.method form li.active a').trigger('click');
+    });
+
+    $('div.headers h4').click(function(event) {
+        event.preventDefault();
+
+        $(this.parentNode).toggleClass('expanded');
+
+        $('div.fields', this.parentNode).slideToggle();
+    });
+
 
 })();

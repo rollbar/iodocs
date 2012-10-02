@@ -1,3 +1,4 @@
+link(rel='stylesheet', href='stylesheets/tabs.css')
 - if (session.authed && apiInfo.oauth && apiInfo.oauth.type =='three-legged')
     - var authed ='authed'
 - else
@@ -154,3 +155,23 @@ ul
                                     // Create header fields and button to add/remove headers.
                             - if (!method['read-only'])
                                 input(type='submit', id=method.MethodName, value='Try it!')
+                            .examples
+                                - if (method.examples)
+                                    - var exampleId = endpoint.name + '-' + method.MethodName.replace(/\//g, '-') + '-' + method.HTTPMethod
+                                    div.tabs_container
+                                        ul.example-nav.tabs
+                                            - var counter = 0
+                                            - each example, lang in method.examples
+                                                li(class=(counter == 0 ? ' active' : ''))
+                                                    a(href="/examples/" + example + '#' + exampleId, class="example", exampleId=exampleId)
+                                                        #{lang}
+                                                - counter++
+                                    div.tab_content_container
+                                        a(name=exampleId)
+                                        div(id=exampleId, class="tab_content', style="margin:10px;")
+                                            - var counter =0
+                                            - each example, lang in method.examples
+                                                - if (counter == 0)
+                                                    script
+                                                        $('##{exampleId}').load('/examples/#{example}');
+                                                - counter++

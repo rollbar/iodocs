@@ -1,0 +1,14 @@
+include highlight
+div
+    h2 Python Example
+    pre
+        code.python
+            import requests
+            resp = requests.get("#{baseUrl}/project?access_token=#{accessToken}").json
+            if resp['err'] == 0:
+                proj = resp['result']
+                args = (proj['id'], proj['slug'], datetime.fromtimestamp(proj['date_created']))
+                print 'Id: %d, Name: %s, Date Created: %s' % args
+            else:
+                print 'error:', resp['message']
+

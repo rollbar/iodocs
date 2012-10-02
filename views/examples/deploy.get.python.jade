@@ -1,0 +1,15 @@
+include highlight
+div
+    h2 Python Example
+    pre
+        code.python
+            from datetime import datetime
+            import requests
+            resp = requests.get("#{baseUrl}/deploy/#{query.params.deploy_id || ':deploy_id'}?access_token=#{accessToken}").json
+            if resp['err'] == 0:
+                item = resp['result']
+                args = (item['id'], item['project_id'], datetime.fromtimestamp(item['start_time']))
+                print 'Deploy id: %d, Project: %d, Start time: %s' % args
+            else:
+                print 'error:', resp['message']
+
