@@ -677,7 +677,7 @@ app.get('/iodocs/', function(req, res) {
     });*/
 });
 
-app.get('/examples/:exampleId', function(req, res) {
+app.get('/iodocs/examples/:exampleId', function(req, res) {
     var exampleTemplate = 'examples/' + req.params.exampleId + '.jade'; 
     var apiName = 'ratchet';
     var apiConfig = apisConfig[apiName];

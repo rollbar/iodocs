@@ -163,7 +163,7 @@ ul
                                             - var counter = 0
                                             - each example, lang in method.examples
                                                 li(class=(counter == 0 ? ' active' : ''))
-                                                    a(href="/examples/" + example + '#' + exampleId, class="example", exampleId=exampleId)
+                                                    a(href="/iodocs/examples/" + example + '#' + exampleId, class="example", exampleId=exampleId)
                                                         #{lang}
                                                 - counter++
                                     div.tab_content_container
@@ -173,5 +173,5 @@ ul
                                             - each example, lang in method.examples
                                                 - if (counter == 0)
                                                     script
-                                                        $('##{exampleId}').load('/examples/#{example}');
+                                                        $('##{exampleId}').load('/iodocs/examples/#{example}');
                                                 - counter++
