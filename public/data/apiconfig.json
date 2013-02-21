@@ -1,8 +1,8 @@
 {
-    "ratchet": {
-        "name": "Ratchet.io",
+    "rollbar": {
+        "name": "Rollbar",
         "protocol": "https",
-        "baseURL": "submit.ratchet.io",
+        "baseURL": "api.rollbar.com",
         "publicPath": "/api/1",
         "auth": "key",
         "keyParam": "access_token"

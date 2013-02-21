@@ -666,8 +666,8 @@ app.dynamicHelpers({
 // Routes
 //
 app.get('/iodocs/', function(req, res) {
-    // hack to make this always show the ratchet api
-    req.params.api = 'ratchet';
+    // hack to make this always show the rollbar api
+    req.params.api = 'rollbar';
     res.render('api', {
         access_token: req.query.access_token
     });
@@ -679,7 +679,7 @@ app.get('/iodocs/', function(req, res) {
 
 app.get('/iodocs/examples/:exampleId', function(req, res) {
     var exampleTemplate = 'examples/' + req.params.exampleId + '.jade'; 
-    var apiName = 'ratchet';
+    var apiName = 'rollbar';
     var apiConfig = apisConfig[apiName];
     var baseUrl = apiConfig.protocol + '://' + apiConfig.baseURL + apiConfig.publicPath;
 

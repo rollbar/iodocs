@@ -9,8 +9,8 @@ include highlight
     - buffer.push("payload['comment'] = '" + query.params.comment + "'")
 - if (query.params.local_username && query.params.local_username.length > 0)
     - buffer.push("payload['local_username'] = '" + query.params.local_username + "'")
-- if (query.params.ratchet_username && query.params.ratchet_username.length > 0)
-    - buffer.push("payload['ratchet_username'] = '" + query.params.ratchet_username + "'")
+- if (query.params.rollbar_username && query.params.rollbar_username.length > 0)
+    - buffer.push("payload['rollbar_username'] = '" + query.params.rollbar_username + "'")
 
 div
     h2 Python Example

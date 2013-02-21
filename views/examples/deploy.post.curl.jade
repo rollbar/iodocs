@@ -14,9 +14,9 @@ include highlight
 - if (query.params.local_username && query.params.local_username.length > 0)
     - varBuffer.push("LOCAL_USERNAME=" + (query.params.local_username || "`whoami`"))
     - paramBuffer.push("-F local_username=$LOCAL_USERNAME")
-- if (query.params.ratchet_username && query.params.ratchet_username.length > 0)
-    - varBuffer.push("RATCHET_USERNAME=" + query.params.ratchet_username)
-    - paramBuffer.push("-F ratchet_username=$RATCHET_USERNAME")
+- if (query.params.rollbar_username && query.params.rollbar_username.length > 0)
+    - varBuffer.push("RATCHET_USERNAME=" + query.params.rollbar_username)
+    - paramBuffer.push("-F rollbar_username=$RATCHET_USERNAME")
 
 div
     h2 Curl Example

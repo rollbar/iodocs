@@ -15,7 +15,7 @@
               "Required": "Y",
               "Default": "",
               "Type": "string",
-              "Description": "The ID of the item. Same as the ID found in the URL, e.g. http://ratchet.io/item/:item_id"
+              "Description": "The ID of the item. Same as the ID found in the URL, e.g. http://rollbar.com/item/:item_id"
             }
           ],
           "examples": {
@@ -78,7 +78,7 @@
               "Required": "Y",
               "Default": "",
               "Type": "integer",
-              "Description": "ID of the instance to retrieve. Same as found in URLS like ratchet.io/item/:item_id/instance/:instance_id"
+              "Description": "ID of the instance to retrieve. Same as found in URLS like rollbar.com/item/:item_id/instance/:instance_id"
             }
           ],
           "examples": {
@@ -125,7 +125,7 @@
               "Required": "Y",
               "Default": "",
               "Type": "string",
-              "Description": "The ID of the item. Same as the ID found in the URL, e.g. http://ratchet.io/item/:item_id"
+              "Description": "The ID of the item. Same as the ID found in the URL, e.g. http://rollbar.com/item/:item_id"
             },
             {
               "Name": "page",
@@ -157,7 +157,7 @@
               "Required": "Y",
               "Default": "",
               "Type": "integer",
-              "Description": "The ID of the deploy. Same as the ID found in URLs like ratchet.io/deploy/:deploy_id"
+              "Description": "The ID of the deploy. Same as the ID found in URLs like rollbar.com/deploy/:deploy_id"
             }
           ],
           "examples": {
@@ -194,7 +194,7 @@
         },
         {
           "MethodName": "deploy",
-          "Synopsis": "Notify Ratchet of a deploy",
+          "Synopsis": "Notify Rollbar of a deploy",
           "HTTPMethod": "POST",
           "URI": "/deploy/",
           "RequiresOAuth": "N",
@@ -242,11 +242,11 @@
               "Description": "Username or other identifier of the user who deployed. For example, the output of `whoami`"
             },
             {
-              "Name": "ratchet_username",
+              "Name": "rollbar_username",
               "Required": "N",
               "Default": "",
               "Type": "string",
-              "Description": "Ratchet username of the user who deployed."
+              "Description": "Rollbar username of the user who deployed."
             }
           ],
           "examples": {
