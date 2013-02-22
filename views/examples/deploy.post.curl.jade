@@ -15,8 +15,8 @@ include highlight
     - varBuffer.push("LOCAL_USERNAME=" + (query.params.local_username || "`whoami`"))
     - paramBuffer.push("-F local_username=$LOCAL_USERNAME")
 - if (query.params.rollbar_username && query.params.rollbar_username.length > 0)
-    - varBuffer.push("RATCHET_USERNAME=" + query.params.rollbar_username)
-    - paramBuffer.push("-F rollbar_username=$RATCHET_USERNAME")
+    - varBuffer.push("ROLLBAR_USERNAME=" + query.params.rollbar_username)
+    - paramBuffer.push("-F rollbar_username=$ROLLBAR_USERNAME")
 
 div
     h2 Curl Example
