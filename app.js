@@ -641,6 +641,9 @@ app.dynamicHelpers({
         } else {
             info = apisConfig;
         }
+        // make a copy
+        info = util._extend({}, info);
+
         console.log("in apiInfo");
         if (req.query.access_token) {
             console.log("got an access token");
