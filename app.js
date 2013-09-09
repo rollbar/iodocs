@@ -26,6 +26,7 @@
 //
 var express     = require('express'),
     util        = require('util'),
+    underscore  = require('underscore'),
     fs          = require('fs'),
     OAuth       = require('oauth').OAuth,
     query       = require('querystring'),
@@ -642,7 +643,7 @@ app.dynamicHelpers({
             info = apisConfig;
         }
         // make a copy
-        info = util._extend({}, info);
+        info = underscore.clone(info);
 
         console.log("in apiInfo");
         if (req.query.access_token) {
