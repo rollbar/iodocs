@@ -4,7 +4,7 @@
       "name": "Items",
       "methods": [
         {
-          "MethodName": "item",
+          "MethodName": "Item Info",
           "Synopsis": "Returns data for the specified item ID.",
           "HTTPMethod": "GET",
           "URI": "/item/:item_id",
@@ -24,7 +24,7 @@
           }
         },
         {
-          "MethodName": "items",
+          "MethodName": "List Items",
           "Synopsis": "Returns a page of all items for the project.",
           "HTTPMethod": "GET",
           "URI": "/items/",
@@ -67,7 +67,7 @@
       "name": "Instances",
       "methods": [
         {
-          "MethodName": "instance",
+          "MethodName": "Instance Info",
           "Synopsis": "Returns data for the specified instance ID.",
           "HTTPMethod": "GET",
           "URI": "/instance/:instance_id",
@@ -87,7 +87,7 @@
           }
         },
         {
-          "MethodName": "instances",
+          "MethodName": "List Instances",
           "Synopsis": "Returns a page of all the instances for the project.",
           "HTTPMethod": "GET",
           "URI": "/instances/",
@@ -114,7 +114,7 @@
           }
         },
         {
-          "MethodName": "item/instances",
+          "MethodName": "List Item Instances",
           "Synopsis": "Returns a page of all instances for a particular item.",
           "HTTPMethod": "GET",
           "URI": "/item/:item_id/instances/",
@@ -146,7 +146,7 @@
       "name": "Deploys",
       "methods": [
         {
-          "MethodName": "deploy",
+          "MethodName": "Deploy Info",
           "Synopsis": "Returns data for the specified deploy ID.",
           "HTTPMethod": "GET",
           "URI": "/deploy/:deploy_id",
@@ -166,7 +166,7 @@
           }
         },
         {
-          "MethodName": "deploys",
+          "MethodName": "List Deploys",
           "Synopsis": "Returns a page of all deploys for the project.",
           "HTTPMethod": "GET",
           "URI": "/deploys/",
@@ -193,7 +193,7 @@
           }
         },
         {
-          "MethodName": "deploy",
+          "MethodName": "Report Deploy",
           "Synopsis": "Notify Rollbar of a deploy",
           "HTTPMethod": "POST",
           "URI": "/deploy/",
@@ -257,19 +257,395 @@
       ]
     },
     {
-      "name": "Project",
+      "name": "Projects",
       "methods": [
         {
-          "MethodName": "project",
-          "Synopsis": "Returns information about the project that the used access_token belongs to.",
-          "HTTPMethod": "GET",
-          "URI": "/project",
+          "MethodName": "Create Project",
+          "Synopsis": "Creates a new project in this account",
+          "HTTPMethod": "POST",
+          "URI": "/projects",
           "RequiresOAuth": "N",
-          "parameters": [],
+          "parameters": [
+            {
+              "Name": "slug",
+              "Required": "Y",
+              "Default": "",
+              "Type": "string",
+              "Description": "Name of the project. Must be unique within this account."
+            }
+          ],
+          "examples": {}
+        },
+        {
+          "MethodName": "Get Project",
+          "Synopsis": "Returns information about the specified project.",
+          "HTTPMethod": "GET",
+          "URI": "/project/:project_id",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "project_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The Project ID, as returned by other API calls."
+            }
+          ],
           "examples": {
             "curl": "project.get.curl",
             "python": "project.get.python"
           }
+        },
+        {
+          "MethodName": "List Projects",
+          "Synopsis": "Returns the list of projects in the account",
+          "HTTPMethod": "GET",
+          "URI": "/projects/",
+          "RequiresOAuth": "N",
+          "parameters": [],
+          "examples": {}
+        },
+        {
+          "MethodName": "Delete Project",
+          "Synopsis": "Deletes the specified project. WARNING: There is no undo.",
+          "HTTPMethod": "DELETE",
+          "URI": "/project/:project_id",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "project_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The Project ID, as returned by other API calls."
+            }
+          ],
+          "examples": {}
+        }
+      ]
+    },
+    {
+      "name": "Teams",
+      "methods": [
+        {
+          "MethodName": "Create Team",
+          "Synopsis": "Creates a new team within this account",
+          "HTTPMethod": "POST",
+          "URI": "/teams",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "name",
+              "Required": "Y",
+              "Default": "",
+              "Type": "string",
+              "Description": "Team name. Must be unique within this account."
+            },
+            {
+              "Name": "access_level",
+              "Required": "Y",
+              "Default": "",
+              "Type": "enumerated",
+              "EnumeratedList": [
+                "edit",
+                "items"
+              ]
+            }
+          ],
+          "examples": {}
+        },
+        {
+          "MethodName": "Get Team",
+          "Synopsis": "",
+          "HTTPMethod": "GET",
+          "URI": "/team/:team_id",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "team_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The Team ID, as returned by other API calls."
+            }
+          ],
+          "examples": {}
+        },
+        {
+          "MethodName": "List Teams",
+          "Synopsis": "Returns all teams in the account",
+          "HTTPMethod": "GET",
+          "URI": "/teams",
+          "RequiresOAuth": "N",
+          "parameters": [],
+          "examples": {}
+        },
+        {
+          "MethodName": "Delete Team",
+          "Synopsis": "Deletes the specified team. WARNING: There is no undo.",
+          "HTTPMethod": "DELETE",
+          "URI": "/team/:team_id",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "team_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The Team ID, as returned by other API calls."
+            }
+          ],
+          "examples": {}
+        }
+      ]
+    },
+    {
+      "name": "Team-Project Relationship",
+      "methods": [
+        {
+          "MethodName": "Grant team access to project",
+          "Synopsis": "",
+          "HTTPMethod": "PUT",
+          "URI": "/team/:team_id/project/:project_id",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "team_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The Team ID, as returned by other API calls."
+            },
+            {
+              "Name": "project_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The Project ID, as returned by other API calls."
+            }
+          ],
+          "examples": {}
+        },
+        {
+          "MethodName": "Get TeamProject",
+          "Synopsis": "",
+          "HTTPMethod": "GET",
+          "URI": "/team/:team_id/project/:project_id",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "team_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The Team ID, as returned by other API calls."
+            },
+            {
+              "Name": "project_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The Project ID, as returned by other API calls."
+            }
+          ],
+          "examples": {}
+        },
+        {
+          "MethodName": "List accessible projects",
+          "Synopsis": "",
+          "HTTPMethod": "GET",
+          "URI": "/team/:team_id/projects",
+          "RequiresOAuth": "N",
+          "parameters": [],
+          "examples": {}
+        },
+        {
+          "MethodName": "Remove project from team",
+          "Synopsis": "",
+          "HTTPMethod": "DELETE",
+          "URI": "/team/:team_id/project/:project_id",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "team_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The Team ID, as returned by other API calls."
+            },
+            {
+              "Name": "project_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The Project ID, as returned by other API calls."
+            }
+          ],
+          "examples": {}
+        }
+      ]
+    },
+    {
+      "name": "Team-User Relationship",
+      "methods": [
+        {
+          "MethodName": "List team members",
+          "Synopsis": "",
+          "HTTPMethod": "GET",
+          "URI": "/team/:team_id/users",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "team_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The Team ID, as returned by other API calls."
+            }
+          ],
+          "examples": {}
+        },
+        {
+          "MethodName": "Get membership",
+          "Synopsis": "",
+          "HTTPMethod": "GET",
+          "URI": "/team/:team_id/user/:user_id",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "team_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The Team ID, as returned by other API calls."
+            },
+            {
+              "Name": "user_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The User ID, as returned by other API calls."
+            }
+          ],
+          "examples": {}
+        },
+        {
+          "MethodName": "Remove user from team",
+          "Synopsis": "",
+          "HTTPMethod": "DELETE",
+          "URI": "/team/:team_id/project/:project_id",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "team_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The Team ID, as returned by other API calls."
+            },
+            {
+              "Name": "user_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The User ID, as returned by other API calls."
+            }
+          ],
+          "examples": {}
+        }
+      ]
+    },
+    {
+      "name": "Invites",
+      "methods": [
+        {
+          "MethodName": "Send Invite",
+          "Synopsis": "",
+          "HTTPMethod": "POST",
+          "URI": "/team/:team_id/invites",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "team_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The Team ID, as returned by other API calls."
+            },
+            {
+              "Name": "user_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The User ID, as returned by other API calls."
+            }
+          ],
+          "examples": {}
+        },
+        {
+          "MethodName": "List Invites",
+          "Synopsis": "",
+          "HTTPMethod": "GET",
+          "URI": "/team/:team_id/invites",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "team_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The Team ID, as returned by other API calls."
+            }
+          ],
+          "examples": {}
+        },
+        {
+          "MethodName": "Invite Info",
+          "Synopsis": "",
+          "HTTPMethod": "GET",
+          "URI": "/invite/:invite_id",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "team_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The Team ID, as returned by other API calls."
+            },
+            {
+              "Name": "invite_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The Invite ID, as returned by other API calls."
+            }
+          ],
+          "examples": {}
+        },
+        {
+          "MethodName": "Cancel Invite",
+          "Synopsis": "",
+          "HTTPMethod": "DELETE",
+          "URI": "/invite/:invite_id",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "team_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The Team ID, as returned by other API calls."
+            },
+            {
+              "Name": "invite_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "integer",
+              "Description": "The Invite ID, as returned by other API calls."
+            }
+          ],
+          "examples": {}
         }
       ]
     }
