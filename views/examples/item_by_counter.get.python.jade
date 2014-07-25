@@ -1,0 +1,14 @@
+include highlight
+div
+    h2 Python Example
+    pre
+        code.python
+            from datetime import datetime
+            import requests
+            resp = requests.get("#{baseUrl}/item_by_counter/#{query.params.counter || ':counter'}?access_token=#{accessToken}").json
+            if resp['err'] == 0:
+                result = resp['result']
+                print 'Item id: %d' % (result['item_id'])
+            else:
+                print 'error:', resp['message']
+

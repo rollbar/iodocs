@@ -4,6 +4,26 @@
       "name": "Items",
       "methods": [
         {
+          "MethodName": "item_by_counter",
+          "Synopsis": "Returns the item ID for a specified project counter. The 'counter' is the number you see in urls like https://rollbar.com/accountname/projectname/items/1234/",
+          "HTTPMethod": "GET",
+          "URI": "/item_by_counter/:counter",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "counter",
+              "Required": "Y",
+              "Default": "",
+              "Type": "string",
+              "Description": "The project-specific counter identifier of the item. Get this from URLs like https://rollbar.com/accountname/projectname/items/1234/"
+            }
+          ],
+          "examples": {
+            "curl": "item_by_counter.get.curl",
+            "python": "item_by_counter.get.python"
+          }
+        },
+        {
           "MethodName": "item",
           "Synopsis": "Returns data for the specified item ID.",
           "HTTPMethod": "GET",
@@ -15,7 +35,7 @@
               "Required": "Y",
               "Default": "",
               "Type": "string",
-              "Description": "The ID of the item. Same as the ID found in the URL, e.g. http://rollbar.com/item/:item_id"
+              "Description": "The system-wide ID of the item. Get this ID from the /item_by_counter/:counter endpoint."
             }
           ],
           "examples": {

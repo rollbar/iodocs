@@ -1,0 +1,6 @@
+include highlight
+div
+    h2 Curl Example
+    pre
+        code.bash
+            curl #{baseUrl}/item_by_counter/#{query.params.counter || ':counter'}?access_token=#{accessToken}
