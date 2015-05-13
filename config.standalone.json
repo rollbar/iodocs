@@ -1,11 +1,11 @@
 {
     "title" : "Rollbar API Test Console",
-    "address": "0.0.0.0",
+    "address": "localhost",
     "port" : 8280,
     "debug" : false,
-    "sessionSecret" : "ab34923b32",
+    "sessionSecret" : "standalone",
     "redis" : {
-                "host" : "redis2",
+                "host" : "localhost",
                 "port" : 6379,
                 "password" : "",
                 "database" : "iodocs"
