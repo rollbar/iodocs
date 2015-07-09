@@ -1,0 +1,13 @@
+{
+    "title" : "Rollbar API Test Console",
+    "address": "localhost",
+    "port" : 8280,
+    "debug" : false,
+    "sessionSecret" : "standalone",
+    "redis" : {
+                "host" : "datastore",
+                "port" : 6379,
+                "password" : "",
+                "database" : "iodocs"
+             }
+}
