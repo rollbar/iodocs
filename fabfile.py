@@ -8,7 +8,7 @@ import requests
 CODE_DIR = '/home/deploy/www/iodocs'
 
 env.roledefs = {
-    'web': ['web4', 'web8'],
+    'web': ['dal05web1', 'dal05web2'],
 }
 
 
