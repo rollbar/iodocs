@@ -7,9 +7,25 @@ import requests
 
 CODE_DIR = '/home/deploy/www/iodocs'
 
-env.roledefs = {
-    'web': ['dal05web1', 'dal05web2'],
-}
+consul = consulate.Session()
+
+def group_map():
+
+    ansible_group_list = consul.kv.find('ansible/groups')
+
+    ansible_group_map = {}
+
+    for path, groups in ansible_group_list.iteritems():
+        host = os.path.basename(path)
+        for group in groups.split(','):
+            if group in ansible_group_map:
+                ansible_group_map[group].append(host)
+            else:
+                ansible_group_map[group] = [host]
+
+    return ansible_group_map
+
+env.roledefs = group_map()
 
 
 def deploy():
@@ -24,7 +40,7 @@ def deploy():
     execute(update_and_restart)
 
 
-@roles('web')
+@roles('apps-web')
 def update_and_restart():
     with cd(CODE_DIR):
         run("git pull")
