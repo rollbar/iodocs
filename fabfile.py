@@ -1,6 +1,7 @@
 import getpass
 import os
 import sys
+import consulate
 
 from fabric.api import run, local, cd, env, roles, execute
 import requests
