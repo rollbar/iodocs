@@ -8,6 +8,8 @@ import requests
 
 CODE_DIR = '/home/deploy/www/iodocs'
 
+env.forward_agent = True
+
 consul = consulate.Session()
 
 def group_map():
