@@ -3,7 +3,7 @@
 let
 
 config = moxLib.projectConfig ./. {
-  enabled = true;
+  enabled = {};
 };
 
 in
