@@ -4,3 +4,5 @@ logs/*
 pids/*
 *.pyc
 .idea
+.provisioned
+config.nix
