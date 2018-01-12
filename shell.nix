@@ -1,5 +1,5 @@
 let pkgs  = import <nixpkgs> {};
-    pkgs' = import pkgs.path { overlays = [ (import ../vagrant-dev-vm/nix) ]; };
+    pkgs' = import pkgs.path { overlays = [ (import ../rollbar-nix/overlays) ]; };
 in pkgs'.callPackage ({
   nodejs_0_10,
   stdenv,
